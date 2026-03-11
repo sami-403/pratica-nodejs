@@ -1,0 +1,27 @@
+{
+  "name": "pratica-nodejs",
+  "version": "1.0.0",
+  "description": "Praticas de NodeJs",
+  "homepage": "https://github.com/sami-403/pratica-nodejs#readme",
+  "bugs": {
+    "url": "https://github.com/sami-403/pratica-nodejs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sami-403/pratica-nodejs.git"
+  },
+  "license": "ISC",
+  "author": "Sami",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "ejs": "^5.0.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.3.0",
+    "nodemon": "^3.1.14"
+  }
+}
