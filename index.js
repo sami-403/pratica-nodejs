@@ -1,29 +1,33 @@
-require("dotenv").config(); // importa o .env para
-const express = require("express");
-const sequelize = require("./database/db"); // importa a função que se conecta ao banco
+import "dotenv/config";
+import express from "express";
+// Importamos as duas instâncias usando chaves { }
+import { sequelizeUsers, sequelizeFoods } from "./database/db.js";
 
-const { name } = require("ejs");
 const app = express();
-
-// define a porta do .env, mas ainda usa a reserva em caso de indisponibilidade.
 const port = process.env.PORT || 3001;
 
 app.use(express.json());
 
-sequelize
-  .sync({ alter: true })
-  .then(() => {
-    console.log("Banco de dados sincronizado e tabelas criadas com sucesso!");
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o banco de dados:", error);
-  }); // conexão ao banco de dados
+// Função para sincronizar os dois bancos ao mesmo tempo
+const connectDatabases = async () => {
+  try {
+    await sequelizeUsers.sync({ alter: true });
+    console.log("✅ Banco de USUÁRIOS sincronizado!");
 
-app.get("/", async (req, res) => {
- 
+    // Sincroniza o banco de comidas
+    await sequelizeFoods.sync({ alter: true });
+    console.log("✅ Banco de COMIDAS sincronizado!");
+  } catch (error) {
+    console.error("❌ Erro ao sincronizar os bancos de dados:", error);
+  }
+};
+
+connectDatabases();
+
+app.get("/", (req, res) => {
   res.send("Ola mundo");
 });
 
 app.listen(port, () =>
-  console.log(`O servidor esta rodando em "localhost:${port}!"`),
+  console.log(`🚀 O servidor esta rodando em "http://localhost:${port}"`),
 );

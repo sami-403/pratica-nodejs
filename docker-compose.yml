@@ -1,0 +1,30 @@
+services:
+  db_users:
+    image: postgres:15
+    container_name: postgres_users
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_USERS_NAME}
+      POSTGRES_USER: ${DB_USERS_USER} 
+      POSTGRES_PASSWORD: ${DB_USERS_PASS} 
+    ports:
+      - "${DB_USERS_PORT}:5432" 
+    volumes:
+      - users_data:/var/lib/postgresql/data
+
+  db_foods:
+    image: postgres:15
+    container_name: postgres_foods
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_FOODS_NAME}
+      POSTGRES_USER: ${DB_FOODS_USER} 
+      POSTGRES_PASSWORD: ${DB_FOODS_PASS} 
+    ports:
+      - "${DB_FOODS_PORT}:5432" 
+    volumes:
+      - foods_data:/var/lib/postgresql/data
+
+volumes:
+  users_data:
+  foods_data:
